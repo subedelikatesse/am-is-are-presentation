@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM / IS / ARE Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFE5EC 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 50px;
+            min-height: 600px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide1 {
+            background: linear-gradient(135deg, #87CEEB 0%, #98D8E8 100%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slide1 h1 {
+            font-size: 72px;
+            color: #FF6B9D;
+            text-shadow: 3px 3px 0 white, 6px 6px 0 #FFB6C1;
+            margin-bottom: 20px;
+        }
+        
+        .slide1 h2 {
+            font-size: 36px;
+            color: #4A4A4A;
+            margin-bottom: 40px;
+        }
+        
+        .rainbow {
+            width: 300px;
+            height: 150px;
+            border-radius: 150px 150px 0 0;
+            background: linear-gradient(to right, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
+            margin: 30px auto;
+        }
+        
+        .slide2 {
+            background: #FFF9E6;
+        }
+        
+        h2 {
+            color: #FF6B9D;
+            font-size: 42px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .explanation {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .explanation p {
+            font-size: 22px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .color-box {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 26px;
+            margin: 5px;
+        }
+        
+        .am-color {
+            background: #FFD700;
+            color: #333;
+        }
+        
+        .is-color {
+            background: #87CEEB;
+            color: #333;
+        }
+        
+        .are-color {
+            background: #98FB98;
+            color: #333;
+        }
+        
+        .rule-box {
+            background: linear-gradient(135deg, #FFF9E6, #FFE5EC);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 8px solid #FF6B9D;
+        }
+        
+        .rule-box h3 {
+            color: #FF6B9D;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .rule-box p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .example-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+        }
+        
+        .example-card.am { border-top-color: #FFD700; }
+        .example-card.is { border-top-color: #87CEEB; }
+        .example-card.are { border-top-color: #98FB98; }
+        
+        .example-card p {
+            font-size: 20px;
+            margin: 8px 0;
+        }
+        
+        .exercise {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .exercise h3 {
+            color: #FF6B9D;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 12px;
+            background: #F0F8FF;
+            border-radius: 10px;
+            border-left: 4px solid #87CEEB;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background: #FFE5EC;
+        }
+        
+        button {
+            padding: 15px 35px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            background: #FF6B9D;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #FF4D7D;
+            transform: scale(1.05);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        .slide-counter {
+            text-align: center;
+            padding: 10px;
+            background: #FFE5EC;
+            color: #FF6B9D;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .visual-chart {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .chart-item {
+            text-align: center;
+            padding: 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+        
+        .chart-item .circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 34px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .chart-item p {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .text-task {
+            background: #FFF9E6;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 3px dashed #FF6B9D;
+        }
+
+        .text-task p {
+            font-size: 20px;
+            line-height: 1.7;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="slideNumber">1</span> / <span id="totalSlides">14</span>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active slide1">
+            <h1>AM / IS / ARE</h1>
+            <h2>Глагол "TO BE"</h2>
+            <div class="rainbow"></div>
+            <p style="font-size: 28px; color: #4A4A4A; margin-top: 30px;">Давай разберёмся вместе! 🌟<br>Let's understand together!</p>
+        </div>
+        
+        <!-- Slide 2: What is TO BE? -->
+        <div class="slide">
+            <h2>Что такое TO BE? 🤔</h2>
+            <div class="explanation">
+                <p><strong>По-русски:</strong> Мы говорим "Я счастлива" или "Он ученик".</p>
+                <p><strong>In English:</strong> НО! В английском мы ОБЯЗАТЕЛЬНО используем специальное слово - AM, IS или ARE!</p>
+                <p style="color: #666; font-size: 18px; margin-top: 20px;">TO BE = БЫТЬ, НАХОДИТЬСЯ, ЯВЛЯТЬСЯ</p>
+            </div>
+            
+            <div class="rule-box">
+                <h3>Правило / Rule:</h3>
+                <p>🇷🇺 В русском: "Я ученица" (нет глагола!)</p>
+                <p>🇬🇧 In English: "I AM a student" (нужен AM!)</p>
+                <p style="margin-top: 15px;">🇷🇺 В русском: "Он дома" (нет глагола!)</p>
+                <p>🇬🇧 In English: "He IS at home" (нужен IS!)</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: The Visual Pattern -->
+        <div class="slide">
+            <h2>Запомни цвета! 🎨 Remember the colors!</h2>
+            
+            <div class="visual-chart">
+                <div class="chart-item">
+                    <div class="circle" style="background: #FFD700;">AM</div>
+                    <p>I<br>Я</p>
+                </div>
+                
+                <div class="chart-item">
+                    <div class="circle" style="background: #87CEEB;">IS</div>
+                    <p>He / She / It<br>Он / Она / Оно</p>
+                </div>
+                
+                <div class="chart-item">
+                    <div class="circle" style="background: #98FB98;">ARE</div>
+                    <p>You / We / They<br>Ты / Мы / Они</p>
+                </div>
+            </div>
+            
+            <div class="rule-box">
+                <h3>💡 Секрет / Secret:</h3>
+                <p><span class="am-color">AM</span> = только с "I" (только один раз!)</p>
+                <p><span class="is-color">IS</span> = с одним человеком или вещью (he, she, it, cat, dog, book...)</p>
+                <p><span class="are-color">ARE</span> = с "you" и когда много (we, they, cats, dogs...)</p>
+            </div>
+        </div>
+        
+        <!-- Slide 4: AM examples -->
+        <div class="slide">
+            <h2><span class="am-color" style="padding: 10px 30px; border-radius: 15px;">AM</span></h2>
+            
+            <div class="rule-box">
+                <h3>Правило:</h3>
+                <p>AM используется ТОЛЬКО с "I" (Я)</p>
+                <p>AM is used ONLY with "I"</p>
+            </div>
+            
+            <div class="examples">
+                <div class="example-card am">
+                    <p><strong>I am</strong> happy</p>
+                    <p>Я счастлива</p>
+                </div>
+                <div class="example-card am">
+                    <p><strong>I am</strong> 9 years old</p>
+                    <p>Мне 9 лет</p>
+                </div>
+                <div class="example-card am">
+                    <p><strong>I am</strong> a student</p>
+                    <p>Я ученица</p>
+                </div>
+                <div class="example-card am">
+                    <p><strong>I am</strong> at home</p>
+                    <p>Я дома</p>
+                </div>
+                <div class="example-card am">
+                    <p><strong>I am</strong> nice</p>
+                    <p>Я милая</p>
+                </div>
+                <div class="example-card am">
+                    <p><strong>I am</strong> at school</p>
+                    <p>Я в школе</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: IS examples -->
+        <div class="slide">
+            <h2><span class="is-color" style="padding: 10px 30px; border-radius: 15px;">IS</span></h2>
+            
+            <div class="rule-box">
+                <h3>Правило:</h3>
+                <p>IS используется с HE (он), SHE (она), IT (оно/это)</p>
+                <p>И с названиями: cat, dog, book, school, day...</p>
+                <p style="color: #FF6B9D; margin-top: 10px;">👉 Один человек или одна вещь!</p>
+            </div>
+            
+            <div class="examples">
+                <div class="example-card is">
+                    <p><strong>He is</strong> my friend</p>
+                    <p>Он мой друг</p>
+                </div>
+                <div class="example-card is">
+                    <p><strong>She is</strong> a teacher</p>
+                    <p>Она учительница</p>
+                </div>
+                <div class="example-card is">
+                    <p><strong>It is</strong> a cat</p>
+                    <p>Это кот</p>
+                </div>
+                <div class="example-card is">
+                    <p><strong>My mum is</strong> nice</p>
+                    <p>Моя мама милая</p>
+                </div>
+                <div class="example-card is">
+                    <p><strong>The day is</strong> sunny</p>
+                    <p>День солнечный</p>
+                </div>
+                <div class="example-card is">
+                    <p><strong>My dog is</strong> at home</p>
+                    <p>Моя собака дома</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: ARE examples -->
+        <div class="slide">
+            <h2><span class="are-color" style="padding: 10px 30px; border-radius: 15px;">ARE</span></h2>
+            
+            <div class="rule-box">
+                <h3>Правило:</h3>
+                <p>ARE используется с YOU (ты/вы), WE (мы), THEY (они)</p>
+                <p>И когда много: cats, dogs, books, friends...</p>
+                <p style="color: #FF6B9D; margin-top: 10px;">👉 С "you" ВСЕГДА ARE! И когда много!</p>
+            </div>
+            
+            <div class="examples">
+                <div class="example-card are">
+                    <p><strong>You are</strong> nice</p>
+                    <p>Ты милая</p>
+                </div>
+                <div class="example-card are">
+                    <p><strong>We are</strong> friends</p>
+                    <p>Мы друзья</p>
+                </div>
+                <div class="example-card are">
+                    <p><strong>They are</strong> at school</p>
+                    <p>Они в школе</p>
+                </div>
+                <div class="example-card are">
+                    <p><strong>My parents are</strong> at home</p>
+                    <p>Мои родители дома</p>
+                </div>
+                <div class="example-card are">
+                    <p><strong>The cats are</strong> happy</p>
+                    <p>Кошки счастливы</p>
+                </div>
+                <div class="example-card are">
+                    <p><strong>We are</strong> 9 years old</p>
+                    <p>Нам 9 лет</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Task 1 - Fill in the blanks -->
+        <div class="slide">
+            <h2>Задание 1 📝 Task 1</h2>
+            
+            <div class="exercise">
+                <h3>Вставь am, is или are:</h3>
+                <p style="font-size: 18px; color: #666; margin-bottom: 15px;">Подсказка: вспомни цвета! 🎨</p>
+                
+                <div class="question">
+                    1. I ___ happy.
+                </div>
+                
+                <div class="question">
+                    2. My cat ___ at home.
+                </div>
+                
+                <div class="question">
+                    3. We ___ friends.
+                </div>
+                
+                <div class="question">
+                    4. She ___ a teacher.
+                </div>
+                
+                <div class="question">
+                    5. You ___ nice.
+                </div>
+
+                <div class="question">
+                    6. They ___ at school.
+                </div>
+
+                <div class="question">
+                    7. It ___ sunny today.
+                </div>
+
+                <div class="question">
+                    8. My mum and dad ___ at home.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Task 2 - Translate -->
+        <div class="slide">
+            <h2>Задание 2 📝 Task 2</h2>
+            
+            <div class="exercise">
+                <h3>Переведи с русского на английский:</h3>
+                
+                <div class="question">
+                    1. Я счастлива.<br>
+                    <span style="color: #999;">I ___ happy.</span>
+                </div>
+                
+                <div class="question">
+                    2. Он мой друг.<br>
+                    <span style="color: #999;">He ___ my friend.</span>
+                </div>
+                
+                <div class="question">
+                    3. Мы в школе.<br>
+                    <span style="color: #999;">We ___ at school.</span>
+                </div>
+                
+                <div class="question">
+                    4. Она учительница.<br>
+                    <span style="color: #999;">She ___ a teacher.</span>
+                </div>
+                
+                <div class="question">
+                    5. Ты милая.<br>
+                    <span style="color: #999;">You ___ nice.</span>
+                </div>
+
+                <div class="question">
+                    6. Это кот.<br>
+                    <span style="color: #999;">It ___ a cat.</span>
+                </div>
+
+                <div class="question">
+                    7. Они дома.<br>
+                    <span style="color: #999;">They ___ at home.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Task 3 - Fix mistakes -->
+        <div class="slide">
+            <h2>Задание 3 📝 Task 3</h2>
+            
+            <div class="exercise">
+                <h3>Найди и исправь ошибки:</h3>
+                <p style="font-size: 18px; color: #666; margin-bottom: 15px;">Find and fix the mistakes!</p>
+                
+                <div class="question">
+                    1. I <strong>is</strong> happy. ❌<br>
+                    <span style="color: #999;">I ___ happy.</span>
+                </div>
+                
+                <div class="question">
+                    2. She <strong>are</strong> a teacher. ❌<br>
+                    <span style="color: #999;">She ___ a teacher.</span>
+                </div>
+                
+                <div class="question">
+                    3. They <strong>is</strong> at school. ❌<br>
+                    <span style="color: #999;">They ___ at school.</span>
+                </div>
+                
+                <div class="question">
+                    4. We <strong>am</strong> friends. ❌<br>
+                    <span style="color: #999;">We ___ friends.</span>
+                </div>
+                
+                <div class="question">
+                    5. You <strong>is</strong> nice. ❌<br>
+                    <span style="color: #999;">You ___ nice.</span>
+                </div>
+
+                <div class="question">
+                    6. My cat <strong>are</strong> at home. ❌<br>
+                    <span style="color: #999;">My cat ___ at home.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Task 4 - Choose -->
+        <div class="slide">
+            <h2>Задание 4 📝 Task 4</h2>
+            
+            <div class="exercise">
+                <h3>Выбери правильный ответ / Choose the correct answer:</h3>
+                
+                <div class="question">
+                    1. I (am / is / are) a student.
+                </div>
+                
+                <div class="question">
+                    2. My mum (am / is / are) at home.
+                </div>
+                
+                <div class="question">
+                    3. We (am / is / are) happy.
+                </div>
+                
+                <div class="question">
+                    4. The day (am / is / are) sunny.
+                </div>
+                
+                <div class="question">
+                    5. You (am / is / are) my friend.
+                </div>
+
+                <div class="question">
+                    6. My cats (am / is / are) nice.
+                </div>
+
+                <div class="question">
+                    7. It (am / is / are) a book.
+                </div>
+
+                <div class="question">
+                    8. They (am / is / are) at school.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Task 5 - Full translation -->
+        <div class="slide">
+            <h2>Задание 5 📝 Task 5</h2>
+            
+            <div class="exercise">
+                <h3>Переведи предложения полностью:</h3>
+                <p style="font-size: 18px; color: #666; margin-bottom: 15px;">Translate the full sentences!</p>
+                
+                <div class="question">
+                    1. Мне 9 лет.
+                </div>
+                
+                <div class="question">
+                    2. Моя мама учительница.
+                </div>
+                
+                <div class="question">
+                    3. Мы дома.
+                </div>
+                
+                <div class="question">
+                    4. Сегодня солнечно.
+                </div>
+                
+                <div class="question">
+                    5. Моя собака дома.
+                </div>
+
+                <div class="question">
+                    6. Ты мой друг.
+                </div>
+
+                <div class="question">
+                    7. Они счастливы.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: BONUS Task - Text translation -->
+        <div class="slide">
+            <h2>БОНУС! 🌟 BONUS Task!</h2>
+            
+            <div class="exercise">
+                <h3>Переведи текст с русского на английский:</h3>
+                <p style="font-size: 18px; color: #666; margin-bottom: 15px;">Translate the text from Russian to English!</p>
+                
+                <div class="text-task">
+                    <p><strong>О моей семье / About my family</strong></p>
+                    <p>Меня зовут Ксюша. Мне 9 лет.</p>
+                    <p>Моя мама милая. Она учительница.</p>
+                    <p>Мой папа дома. Он счастливый.</p>
+                    <p>У меня есть кот. Он дома.</p>
+                    <p>Мы счастливая семья!</p>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #F0F8FF; border-radius: 10px;">
+                    <p style="font-size: 18px; color: #666;"><strong>Подсказки:</strong></p>
+                    <p style="font-size: 16px;">My name is... / I am... years old / My mum is... / My dad is... / I have a cat / We are...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Quick reminder -->
+        <div class="slide">
+            <h2>Напоминалка! 💡 Reminder!</h2>
+            
+            <div class="visual-chart">
+                <div class="chart-item">
+                    <div class="circle" style="background: #FFD700;">AM</div>
+                    <p>I<br>Я</p>
+                </div>
+                
+                <div class="chart-item">
+                    <div class="circle" style="background: #87CEEB;">IS</div>
+                    <p>He / She / It<br>один человек/вещь</p>
+                </div>
+                
+                <div class="chart-item">
+                    <div class="circle" style="background: #98FB98;">ARE</div>
+                    <p>You / We / They<br>много или "you"</p>
+                </div>
+            </div>
+
+            <div class="rule-box" style="margin-top: 40px;">
+                <h3>Когда переводишь с русского:</h3>
+                <p>1. Найди, КТО это: I? He/She? We/They?</p>
+                <p>2. Вспомни ЦВЕТ этого слова 🎨</p>
+                <p>3. Используй правильную форму: AM / IS / ARE</p>
+            </div>
+        </div>
+        
+        <!-- Slide 14: Final -->
+        <div class="slide slide1">
+            <div class="nav-buttons" style="background: transparent; padding: 20px 0; margin-bottom: 20px;">
+                <button id="prevBtn" onclick="changeSlide(-1)">⬅️ Назад / Back</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Вперёд / Next ➡️</button>
+            </div>
+
+            <h1>Молодец! 🌟</h1>
+            <h2>You did great!</h2>
+            
+            <div class="rule-box" style="margin-top: 40px; font-size: 22px;">
+                <h3>Запомни навсегда:</h3>
+                <p><span class="am-color">AM</span> = I (всегда!)</p>
+                <p><span class="is-color">IS</span> = He, She, It (один!)</p>
+                <p><span class="are-color">ARE</span> = You, We, They (много или "you"!)</p>
+                <p style="margin-top: 20px; color: #FF6B9D;">TO BE = БЫТЬ, НАХОДИТЬСЯ, ЯВЛЯТЬСЯ</p>
+            </div>
+            
+            <p style="font-size: 32px; margin-top: 40px; color: #FF6B9D;">
+                💖 Теперь ты точно всё понимаешь! 💖
+            </p>
+        </div>
+        
+        <div class="nav-buttons">
+            <button id="prevBtn2" onclick="changeSlide(-1)">⬅️ Назад / Back</button>
+            <button id="nextBtn2" onclick="changeSlide(1)">Вперёд / Next ➡️</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            } else if (n < 0) {
+                currentSlide = 0;
+            } else {
+                currentSlide = n;
+            }
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+            
+            // Update buttons on final slide too
+            if (currentSlide === totalSlides - 1) {
+                document.getElementById('prevBtn2').disabled = false;
+                document.getElementById('nextBtn2').disabled = true;
+            }
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        showSlide(0);
+    </script>
+</body>
+</html>
